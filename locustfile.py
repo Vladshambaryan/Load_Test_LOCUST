@@ -2,66 +2,28 @@ from locust import task, HttpUser
 import random
 
 
-class Products(HttpUser):
+class MemeUser(HttpUser):
+    token = None
+
+    def on_start(self):
+        response = self.client.post(
+            '/authorize',
+            json={'name': 'vlad'}
+        )
+        self.token = response.json()['token']
 
     @task(1)
-    def get_all_products_performance(self):
+    def get_all_memes(self):
         self.client.get(
-            "/objects",
-            headers={"Content-Type": "application/json"}
+            '/meme',
+            headers={'Authorization': self.token}
         )
 
     @task(3)
-    def get_one_product_performance(self):
+    def get_one_meme(self):
         self.client.get(
-            f"/objects/{random.choice([2, 7, 9])}",
-            headers={"Content-Type": "application/json"}
+            f'/meme/{random.choice([21, 29, 44, 50])}',
+            headers={'Authorization': self.token}
         )
 
-    @task(1)
-    def create_product_performance(self):
-        self.client.post(
-            "/objects",
-            json={
-                "name": "Apple MacBook Pro 16",
-                "data": {
-                    "year": 2019,
-                    "price": 1849.99,
-                    "CPU model": "Intel Core i9",
-                    "Hard disk size": "1 TB"
-                }
-            },
-            headers={"Content-Type": "application/json"}
-        )
-
-    @task(1)
-    def update_one_product_performance(self):
-        self.client.put(
-            "/objects/9",
-            json={
-                "name": "Apple MacBook Pro 16",
-                "data": {
-                    "year": 2019,
-                    "price": 2049.99,
-                    "CPU model": "Intel Core i9",
-                    "Hard disk size": "1 TB",
-                    "color": "silver"
-                }
-            },
-            headers={"Content-Type": "application/json"}
-        )
-
-    @task(1)
-    def update_one_product_name_performance(self):
-        self.client.patch(
-            "/objects/9",
-            json={"name": "Apple MacBook Pro 16 (Updated Name)"},
-            headers={"Content-Type": "application/json"}
-        )
-
-    @task(1)
-    def delete_product_performance(self):
-        self.client.delete(
-            "/objects/9",
-            headers={"Content-Type": "application/json"}
-        )
+#  http://167.172.172.115:52355
