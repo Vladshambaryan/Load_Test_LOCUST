@@ -13,17 +13,50 @@ class MemeUser(HttpUser):
         self.token = response.json()['token']
 
     @task(1)
-    def get_all_memes(self):
+    def get_all_memes_performance(self):
         self.client.get(
             '/meme',
             headers={'Authorization': self.token}
         )
 
     @task(3)
-    def get_one_meme(self):
+    def get_one_meme_performance(self):
         self.client.get(
             f'/meme/{random.choice([21, 29, 44, 50])}',
             headers={'Authorization': self.token}
         )
 
-#  http://167.172.172.115:52355
+    @task(4)
+    def post_meme_performance(self):
+        self.client.post(
+            '/meme',
+            json={
+                "id": 23,
+                "text": "wolf",
+                "url": "https://static.independent.co.uk/s3fs-public/thumbnails/image/2010/07/01/16/405231.jpg",
+                "tags": ["red - blu", "black - gold"],
+                "info": {"4444444": ["55555555", "33333", "765765765"]}
+            },
+            headers = {'Authorization': self.token}
+        )
+
+    @task(2)
+    def put_meme_performance(self):
+        self.client.put(f'/meme/{random.choice([21, 29, 44, 50])}',
+            json={
+                "id": 10,
+                "text": "big shrek",
+                "url": "https://static.independent.co.uk/s3fs-public/thumbnails/image/2010/07/01/16/405231.jpg",
+                "tags": ["updated", "meme"],
+                "info": {"author": "Miqael"}
+            },
+            headers={'Authorization': self.token}
+        )
+
+    @task(1)
+    def delete_product_performance(self):
+        self.client.delete(f'/meme/{random.choice([21, 29, 44, 50])}',
+            headers={'Authorization': self.token}
+        )
+
+    #  http://167.172.172.115:52355
