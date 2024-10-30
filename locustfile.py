@@ -19,7 +19,7 @@ class MemeUser(HttpUser):
             headers={'Authorization': self.token}
         )
 
-    @task(3)
+    @task(1)
     def get_one_meme_performance(self):
         self.client.get(
             f'/meme/{random.choice([21, 29, 44, 50])}',
@@ -35,12 +35,12 @@ class MemeUser(HttpUser):
                 "text": "wolf",
                 "url": "https://static.independent.co.uk/s3fs-public/thumbnails/image/2010/07/01/16/405231.jpg",
                 "tags": ["red - blu", "black - gold"],
-                "info": {"4444444": ["55555555", "33333", "765765765"]}
+                "info": {"44": ["55", "33", "65"]}
             },
             headers = {'Authorization': self.token}
         )
 
-    @task(2)
+    @task(1)
     def put_meme_performance(self):
         self.client.put(f'/meme/{random.choice([21, 29, 44, 50])}',
             json={
