@@ -59,5 +59,4 @@ class MemeUser(HttpUser):
             headers={'Authorization': self.token}
         )
 
-    #  http://167.172.172.115:523
-    #  55
+    #  http://167.172.172.115:52355
