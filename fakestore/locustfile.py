@@ -1,8 +1,6 @@
 from locust import task, HttpUser
 import random
 
-#  url = 'https://fakestoreapi.com'
-
 class FakeStore(HttpUser):
 
     @task(1)
@@ -54,7 +52,7 @@ class FakeStore(HttpUser):
             f'/products/{random.choice([21, 29, 44, 50])}',
             json={
                 "title": "new product",
-                "price": 103.5,
+                "price": 10000.5,
                 "description": "lorem set",
                 "image": "https: google.com",
                 "category": "electronic 55555"
@@ -70,5 +68,4 @@ class FakeStore(HttpUser):
         )
 
 
-
-
+#  url = 'https://fakestoreapi.com'
