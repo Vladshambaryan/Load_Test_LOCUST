@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from locust import task, HttpUser
 import random
 
@@ -69,3 +70,6 @@ class FakeStore(HttpUser):
 
 
 #  url = 'https://fakestoreapi.com'
+=======
+
+>>>>>>> cdde2b208681f0ab09aa2f06ff1f2fab0d45abc2
